@@ -48,17 +48,19 @@ class MainActivity : AppCompatActivity() {
 
         sendBtn.setOnClickListener {
             val text = editText.text.trim()
-            if (!text.isEmpty()) {
+            if (text.isNotEmpty()) {
                 val msg = JSONObject()
                 msg.put("Text", text)
-                val currentTime: String =
-                    SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
-                msg.put("Hour", currentTime)
+                msg.put("Hour", SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date()))
                 msg.put("Speaker", "me")
+                msg.put("Emoji", "")
                 messages.put(msg)
+
                 adapter.notifyDataSetChanged();
+
                 val ring: MediaPlayer = MediaPlayer.create(applicationContext, R.raw.send)
                 ring.start()
+
                 scrollToBottom()
                 editText.setText("")
             }
@@ -67,6 +69,9 @@ class MainActivity : AppCompatActivity() {
         attachmentBtn.setOnClickListener {
 
         }
+
+        // Set title bar
+        title = "Harley";
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -75,37 +80,87 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createMessages() {
-        for (i in 1 until 15) {
-            val msg = JSONObject()
-            msg.put("Text", "Hey, I'm a test blaaa $i")
-            val min = String.format("%02d", i)
-            msg.put("Hour", "20h$min")
-            msg.put("Speaker", "other")
-            msg.put("Emoji", "")
-            messages.put(msg)
-        }
 
         var msg = JSONObject()
-        msg.put("Text", "LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message")
-        msg.put("Hour", "20h40")
+        msg.put("Text", "Hey, it's been a long time, how are you?")
+        msg.put("Hour", "20:40")
         msg.put("Speaker", "other")
         msg.put("Emoji", "")
         messages.put(msg)
 
-
-        for (i in 1 until 3) {
-            val msg = JSONObject()
-            msg.put("Text", "BLOOOOOOOh,I respond to the message $i")
-            val min = String.format("%02d", i)
-            msg.put("Hour", "20h$min")
-            msg.put("Speaker", "me")
-            msg.put("Emoji", "")
-            messages.put(msg)
-        }
+        msg = JSONObject()
+        msg.put("Text", "I saw your mom yesterday, she told me you were about to move?")
+        msg.put("Hour", "20:40")
+        msg.put("Speaker", "other")
+        msg.put("Emoji", "")
+        messages.put(msg)
 
         msg = JSONObject()
-        msg.put("Text", "LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message")
-        msg.put("Hour", "20h40")
+        msg.put("Text", "Hey Harley! It's been a while yes, I'm glad you took the time to send me a message!")
+        msg.put("Hour", "20:42")
+        msg.put("Speaker", "me")
+        msg.put("Emoji", "")
+        messages.put(msg)
+
+        msg = JSONObject()
+        msg.put("Text", "I'm doing great thanks. How are you?")
+        msg.put("Hour", "20:43")
+        msg.put("Speaker", "me")
+        msg.put("Emoji", "")
+        messages.put(msg)
+
+        msg = JSONObject()
+        msg.put("Text", "Indeed, I applied at Microsoft and got the job! I'm moving to Atlanta the next week.")
+        msg.put("Hour", "20:43")
+        msg.put("Speaker", "me")
+        msg.put("Emoji", "heart")
+        messages.put(msg)
+
+        msg = JSONObject()
+        msg.put("Text", "I'd love to see you before moving. Are you free this week?")
+        msg.put("Hour", "20:44")
+        msg.put("Speaker", "me")
+        msg.put("Emoji", "")
+        messages.put(msg)
+
+        msg = JSONObject()
+        msg.put("Text", "That's good to hear. I'm good too, I recently got a promotion!")
+        msg.put("Hour", "20:47")
+        msg.put("Speaker", "other")
+        msg.put("Emoji", "")
+        messages.put(msg)
+
+        msg = JSONObject()
+        msg.put("Text", "Whoooa! That's exciting, I always knew you'd be able to do something like that. I'm free on tuesday.")
+        msg.put("Hour", "20:48")
+        msg.put("Speaker", "other")
+        msg.put("Emoji", "")
+        messages.put(msg)
+
+        msg = JSONObject()
+        msg.put("Text", "There's a great coffee place that recently opened near Mc Cheese street, do you want to meet there around 3pm?")
+        msg.put("Hour", "20:48")
+        msg.put("Speaker", "other")
+        msg.put("Emoji", "")
+        messages.put(msg)
+
+        msg = JSONObject()
+        msg.put("Text", "Perfect for me! I can't wait to see, I think we have a lot to talk about!")
+        msg.put("Hour", "20:49")
+        msg.put("Speaker", "me")
+        msg.put("Emoji", "")
+        messages.put(msg)
+
+        msg = JSONObject()
+        msg.put("Text", "That's fore sure! See you on tuesday then, byyyye!")
+        msg.put("Hour", "20:52")
+        msg.put("Speaker", "other")
+        msg.put("Emoji", "like")
+        messages.put(msg)
+
+        msg = JSONObject()
+        msg.put("Text", "See you! \uD83D\uDE18")
+        msg.put("Hour", "20:53")
         msg.put("Speaker", "me")
         msg.put("Emoji", "")
         messages.put(msg)
