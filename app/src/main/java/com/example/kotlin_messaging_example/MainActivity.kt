@@ -9,7 +9,6 @@ import android.view.View
 import android.view.View.OnTouchListener
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.list_item_correspondant.view.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -18,6 +17,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    private var item_selected_position: Int = -1
     private var touchPositionX: Int = 0
     private var touchPositionY: Int = 0
     private val messages  = JSONArray()
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
             val min = String.format("%02d", i)
             msg.put("Hour", "20h$min")
             msg.put("Speaker", "other")
-
+            msg.put("Emoji", "")
             messages.put(msg)
         }
 
@@ -89,6 +89,7 @@ class MainActivity : AppCompatActivity() {
         msg.put("Text", "LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message")
         msg.put("Hour", "20h40")
         msg.put("Speaker", "other")
+        msg.put("Emoji", "")
         messages.put(msg)
 
 
@@ -98,7 +99,7 @@ class MainActivity : AppCompatActivity() {
             val min = String.format("%02d", i)
             msg.put("Hour", "20h$min")
             msg.put("Speaker", "me")
-
+            msg.put("Emoji", "")
             messages.put(msg)
         }
 
@@ -106,6 +107,7 @@ class MainActivity : AppCompatActivity() {
         msg.put("Text", "LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message LOOOOOONG message")
         msg.put("Hour", "20h40")
         msg.put("Speaker", "me")
+        msg.put("Emoji", "")
         messages.put(msg)
     }
 
@@ -132,6 +134,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("MESSAGES", "X: $touchPositionX, Y: $touchPositionY")
 
             emoji_selection_view = view
+            item_selected_position = position
             is_selecting_emoji = true
 
             val i = Intent(applicationContext, ReactionsActivity::class.java)
@@ -149,44 +152,15 @@ class MainActivity : AppCompatActivity() {
             if (resultCode == Activity.RESULT_OK) {
                 val result = data!!.getStringExtra("emoji")
                 Log.d("EMOJI", "Res $result")
-                when (result) {
-                    "dislike" -> {
-                        emoji_selection_view.reaction.visibility = View.VISIBLE
-                        emoji_selection_view.reaction.setImageResource(R.drawable.dislike_48)
-                        val ring: MediaPlayer = MediaPlayer.create(applicationContext, R.raw.pop)
-                        ring.start()
-                    }
-                    "like" -> {
-                        emoji_selection_view.reaction.visibility = View.VISIBLE
-                        emoji_selection_view.reaction.setImageResource(R.drawable.like_48)
-                        val ring: MediaPlayer = MediaPlayer.create(applicationContext, R.raw.pop)
-                        ring.start()
-                    }
-                    "heart" -> {
-                        emoji_selection_view.reaction.visibility = View.VISIBLE
-                        emoji_selection_view.reaction.setImageResource(R.drawable.heart_48)
-                        val ring: MediaPlayer = MediaPlayer.create(applicationContext, R.raw.pop)
-                        ring.start()
-                    }
-                    "surprised" -> {
-                        emoji_selection_view.reaction.visibility = View.VISIBLE
-                        emoji_selection_view.reaction.setImageResource(R.drawable.surprised_48)
-                        val ring: MediaPlayer = MediaPlayer.create(applicationContext, R.raw.pop)
-                        ring.start()
-                    }
-                    "facepalm" -> {
-                        emoji_selection_view.reaction.visibility = View.VISIBLE
-                        emoji_selection_view.reaction.setImageResource(R.drawable.facepalm_48)
-                        val ring: MediaPlayer = MediaPlayer.create(applicationContext, R.raw.pop)
-                        ring.start()
-                    }
-                    "smile" -> {
-                        emoji_selection_view.reaction.visibility = View.VISIBLE
-                        emoji_selection_view.reaction.setImageResource(R.drawable.smile_48)
-                        val ring: MediaPlayer = MediaPlayer.create(applicationContext, R.raw.pop)
-                        ring.start()
-                    }
-                }
+
+                val jsonObject: JSONObject = messages.getJSONObject(item_selected_position)
+                jsonObject.put("Emoji", result)
+
+                messages.put(item_selected_position, jsonObject)
+
+                adapter.notifyDataSetChanged();
+                val ring: MediaPlayer = MediaPlayer.create(applicationContext, R.raw.pop)
+                ring.start()
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
