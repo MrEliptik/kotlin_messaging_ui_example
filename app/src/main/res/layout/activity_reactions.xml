@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".ReactionsActivity"
+    android:background="#00FFFFFF"
+    android:id="@+id/reaction_main">
+
+    <LinearLayout
+        android:id="@+id/reaction_layout"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="8dp"
+        android:background="@drawable/message_bubble_correspondant">
+
+        <ImageButton
+            android:id="@+id/dislike"
+            android:tag="dislike"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/dislike_48"
+            android:scaleType="centerInside" />
+
+        <ImageButton
+            android:id="@+id/facepalm"
+            android:tag="facepalm"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/facepalm_48"
+            android:scaleType="centerInside" />
+
+        <ImageButton
+            android:id="@+id/smile"
+            android:tag="smile"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/smile_48"
+            android:scaleType="centerInside" />
+
+        <ImageButton
+            android:id="@+id/surprised"
+            android:tag="surprised"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/surprised_48"
+            android:scaleType="centerInside" />
+
+        <ImageButton
+            android:id="@+id/like"
+            android:tag="like"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/like_48"
+            android:scaleType="centerInside" />
+
+        <ImageButton
+            android:id="@+id/heart"
+            android:tag="heart"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/heart_48"
+            android:scaleType="centerInside" />
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Messaging example</string>
+    <string name="no_message">Whoa, it\'s empty here!</string>
+</resources>
